@@ -1,6 +1,7 @@
 #include <NeoPixelBus.h>
 #include "effect.h"
 #include "plasma.h"
+#include "fire.h"
 
 const uint16_t PixelCount = 100;
 NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> strip(PixelCount);
@@ -26,11 +27,20 @@ void setup() {
 //  Serial.begin(115200);
 
   strip.Begin();
+  strip.ClearTo(RgbColor(0, 0, 0));
   strip.Show();
   uint8_t *pixels = strip.Pixels(); //100 pixels of 3 bytes each
-  effect = new Plasma(random(255), random(255), random(255), random(255), random(255), random(255),
-    random(8), random(8), random(8), random(8), random(8), random(8),
-    pixels, 10, 10);
+  uint8_t effNum = random(2);
+  switch (effNum) {
+    case 0:
+//      effect = new Plasma(random(255), random(255), random(255), random(255), random(255), random(255),
+//        random(8), random(8), random(8), random(8), random(8), random(8),
+//        pixels, 10, 10);
+//      break;
+    case 1:
+      effect = new Fire(pixels, 10, 10);
+      break;
+  }
   
 //  Serial.println("GO");
 }
