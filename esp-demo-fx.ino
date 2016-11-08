@@ -33,10 +33,10 @@ void setup() {
   uint8_t effNum = random(2);
   switch (effNum) {
     case 0:
-//      effect = new Plasma(random(255), random(255), random(255), random(255), random(255), random(255),
-//        random(8), random(8), random(8), random(8), random(8), random(8),
-//        pixels, 10, 10);
-//      break;
+      effect = new Plasma(random(255), random(255), random(255), random(255), random(255), random(255),
+        random(8), random(8), random(8), random(8), random(8), random(8),
+        pixels, 10, 10);
+      break;
     case 1:
       effect = new Fire(pixels, 10, 10);
       break;
@@ -46,7 +46,7 @@ void setup() {
 }
 
 void loop() {
-  delay(64);
+  delay(effect->delayLength());
   effect->nextFrame();
   
   strip.Dirty();

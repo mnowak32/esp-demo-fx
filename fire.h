@@ -10,6 +10,7 @@ class Fire : public Effect {
   public:
     Fire(uint8_t *pixels, uint8_t xsize, uint8_t ysize);
     void nextFrame();
+    uint16_t delayLength();
   private:
     uint8_t *pixels, xsize, ysize;
     void randomize();

@@ -11,6 +11,7 @@ class Plasma : public Effect {
       uint8_t da0, uint8_t db0, uint8_t da1, uint8_t db1, uint8_t da2, uint8_t db2,
       uint8_t *pixels, uint8_t xsize, uint8_t ysize);
     void nextFrame();
+    uint16_t delayLength();
   private:
     uint8_t a0, b0, a1, b1, a2, b2;
     uint8_t da0, db0, da1, db1, da2, db2;

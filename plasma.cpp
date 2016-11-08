@@ -48,3 +48,7 @@ void Plasma::nextFrame() {
   a2 += da2 - 4; b2 += db2 - 4;
 }
 
+uint16_t Plasma::delayLength() {
+  return 64;
+}
+
