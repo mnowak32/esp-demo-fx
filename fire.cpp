@@ -1,14 +1,18 @@
 #include "fire.h"
 
-static RgbColor palette[256];
+static GrbColor palette[256];
 //
 static uint8_t *field, *seed;
 static uint16_t fSize;
 
-Fire::Fire(uint8_t *pixels, uint8_t xsize, uint8_t ysize) : pixels(pixels), xsize(xsize), ysize(ysize) {
+
+Fire::Fire(uint8_t *pixels, uint8_t xsize, uint8_t ysize) : xsize(xsize), ysize(ysize) {
+  grbPixels = (GrbColor *)pixels;
+  
   for (uint16_t i = 0; i < 256; i++) {
     //initialize palette
-    palette[i] = RgbColor(HslColor(i / 1600.0, 1.0f, (i > 127) ? 0.25f : i / 512.0));
+//    palette[i] = GrbColor(RgbColor(HslColor(i / 1600.0, 1.0f, (i > 127) ? 0.33f : i / 384.0)));
+    palette[i] = GrbColor(RgbColor(HslColor(i / 1600.0, 1.0f, pow(i / 256.0, 1.6f))));
   }
   fSize = xsize * ysize;
   field = new uint8_t[xsize * (ysize + 1)];
@@ -53,13 +57,10 @@ void Fire::calculate() {
 void Fire::paint() {
   uint16_t dy;
   for (uint8_t y = 0; y < ysize; y++) {
-    dy = 3 * xsize * y;
+    dy = xsize * y;
     for (uint8_t x = 0; x < xsize; x++) {
-      RgbColor c = palette[getPixel(x, y + 1)];
-      uint16_t addr = dy + 3 * x;
-      pixels[addr + 0] = c.G;
-      pixels[addr + 1] = c.R;
-      pixels[addr + 2] = c.B;
+      GrbColor c = palette[getPixel(x, y + 1)];
+      grbPixels[dy + x] = c;
     }
   }
 }
@@ -71,6 +72,6 @@ void Fire::nextFrame() {
 }
 
 uint16_t Fire::delayLength() {
-  return 92;
+  return 80;
 }
 

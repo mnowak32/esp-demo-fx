@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <stdint.h>
 #include "effect.h"
-#include <NeoPixelBus.h>
+
 
 class Fire : public Effect {
   public:
@@ -12,7 +12,8 @@ class Fire : public Effect {
     void nextFrame();
     uint16_t delayLength();
   private:
-    uint8_t *pixels, xsize, ysize;
+    GrbColor *grbPixels;
+    uint8_t xsize, ysize;
     void randomize();
     uint8_t getPixel(uint8_t x, uint8_t y);
     void calculate();
