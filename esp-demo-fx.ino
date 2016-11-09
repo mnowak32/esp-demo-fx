@@ -3,6 +3,7 @@
 #include "plasma.h"
 #include "fire.h"
 #include "matrix.h"
+#include "water.h"
 
 const uint16_t PixelCount = 100;
 NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> strip(PixelCount);
@@ -31,7 +32,7 @@ void setup() {
   strip.ClearTo(RgbColor(0, 0, 0));
   strip.Show();
   uint8_t *pixels = strip.Pixels(); //100 pixels of 3 bytes each
-  uint8_t effNum = random(3);
+  uint8_t effNum = random(4);
   switch (effNum) {
     case 0:
       effect = new Plasma(random(255), random(255), random(255), random(255), random(255), random(255),
@@ -43,6 +44,9 @@ void setup() {
       break;
     case 2:
       effect = new Matrix(pixels, 10, 10);
+      break;
+    case 3:
+      effect = new Water(pixels, 10, 10);
       break;
   }
   
